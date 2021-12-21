@@ -1,32 +1,84 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="jpmeteo.css">
+
         <script
             src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
             crossorigin="anonymous">
         </script>
+
+        <link rel="stylesheet" href="jpmeteo.css">
+
+         <!-- Date -->
+         <script type="text/javascript" src="date/jpmeteo_date.js"></script>
+
+        <!-- Rain -->
+        <script type="text/javascript" src="rain/jpmeteo_rain.js"></script>
+        <link rel="stylesheet" href="rain/jpmeteo_rain.css">
+        
         <script type="text/javascript">
 
             var base_url = 'http://api.weatherapi.com/v1';
 
             var api_key = "0368f1d4238b4f12b53161351211712";
 
-            $.getJSON('https://api.weatherapi.com/v1/current.json', {'key':'0368f1d4238b4f12b53161351211712', 'q':"48.17,-1.3"}, function(d)
+            $(document).ready(function()
             {
-                console.log(d);
+                $('.jpmeteo_date').text(jpmeteo_date.date());
 
-                $('.icon').css('background-image' , "url("+d.current.condition.icon+")");
-            })
+                $.getJSON('https://api.weatherapi.com/v1/current.json', {'key':'0368f1d4238b4f12b53161351211712', 'q':"48.17,-1.3"}, function(d)
+                {
+                    console.log(d);
+
+                    $('.icon').css('background-image' , "url("+d.current.condition.icon+")");
+                });
+
+                function rain()
+                {
+                    makeItRain();
+
+                    $('.jpmeteo_rain').addClass('active');
+                }
+
+                function sun()
+                {
+
+                }
+
+                function snow()
+                {
+
+                }
+
+                // rain();
+            });
+
         </script>
     </head>
     <body>
-        <h1>La météo à Val d'Izé</h1>
-    
-        <div class="jpmeteo_main">
-            <div class="icon"></div>
+       
+        <div class="jpmeteo">
 
+            <div class="top">
+                <h1>La météo pour JP</h1>
+                <h2 class="jpmeteo_date"></h2>
+            </div>
+            
+            <div class="center">
+
+                <div class="jpmeteo_rain">
+                    <div class="rain front-row"></div>
+                    <div class="rain back-row"></div>
+                </div>
+
+            </div>
+
+            <div class="bottom">
+                <div class="day 1"></div>
+                <div class="day 2"></div>
+                <div class="day 3"></div>
+            </div>
 
         </div>
     </body>

@@ -1,7 +1,45 @@
+body
+{
+    margin: 0
+}
+
 .jpmeteo_main .icon
 {
     width: 200px;
     height: 200px;
     background-repeat: no-repeat;
     background-position: center;;
+}
+
+.jpmeteo
+{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.jpmeteo .top
+{
+    
+}
+
+.jpmeteo .center
+{
+    background-image: url('resources/fond.jpg');
+    background-position: center;
+    background-size: cover;
+    flex: 1 1 auto;
+}
+
+.jpmeteo .bottom
+{
+    background-color: green;
+    height: 20%;
+    display: flex;
+    flex-direction: row;
+}
+
+.jpmeteo .bottom .day
+{
+    flex: 1 1 33%;
 }
