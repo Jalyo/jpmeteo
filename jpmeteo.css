@@ -1,6 +1,18 @@
 body
 {
-    margin: 0
+    margin: 0;
+    font-family: "Arial";
+    background-color: #FFFFFF;
+    text-transform: uppercase;
+    color: #E74C3C
+}
+
+h1, h2, h3
+{
+    color: #363737;
+    text-transform: uppercase;
+    margin-left: 20px;
+    margin-top: 20px;
 }
 
 .jpmeteo_main .icon
@@ -20,26 +32,117 @@ body
 
 .jpmeteo .top
 {
-    
+    /* background-color: #0F223D; */
 }
 
 .jpmeteo .center
 {
+    position: relative;
     background-image: url('resources/fond.jpg');
     background-position: center;
     background-size: cover;
     flex: 1 1 auto;
+    overflow: hidden;
+}
+
+.jpmeteo .center .jpmeteo_mood
+{
+    position: absolute;
+    bottom: -60px;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right bottom;
+}
+
+.jpmeteo .center .jpmeteo_mood.angry
+{
+    background-image: url(resources/moods/angry.png);
+}
+
+.jpmeteo .center .jpmeteo_mood.bored
+{
+    background-image: url(resources/moods/bored.png);
+}
+
+.jpmeteo .center .jpmeteo_mood.happy
+{
+    background-image: url(resources/moods/happy.png);
+}
+
+.jpmeteo .center .jpmeteo_mood.neutral
+{
+    background-image: url(resources/moods/neutral.png);
+}
+
+.jpmeteo .center .jpmeteo_mood.sad
+{
+    background-image: url(resources/moods/sad.png);
+}
+
+.jpmeteo .center .jpmeteo_mood.warm
+{
+    background-image: url(resources/moods/warm.png);
 }
 
 .jpmeteo .bottom
 {
-    background-color: green;
     height: 20%;
     display: flex;
     flex-direction: row;
 }
 
-.jpmeteo .bottom .day
+.jpmeteo .bottom > div
 {
-    flex: 1 1 33%;
+    flex: 1 1 50%;
+    border-right: 1px solid #E0D6D5;
+    display: flex;
+    flex-direction: column;
+}
+
+.jpmeteo .bottom > div .date
+{
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.jpmeteo .bottom > div .day
+{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.jpmeteo .bottom > div .icon
+{
+    flex: 1 1 auto;
+    width: 100%;
+    display: block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: auto;
+}
+
+.jpmeteo .bottom > div .temp_label
+{
+    display: flex;
+}
+
+.jpmeteo .bottom > div .temp
+{
+    text-align: center;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.jpmeteo .bottom > div .label
+{
+    margin-left: auto;
+    margin-right: 20px;
+    margin-bottom: 20px;;
+    text-align: center;
 }

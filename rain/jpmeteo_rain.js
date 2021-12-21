@@ -1,4 +1,5 @@
-var makeItRain = function() {
+$(document).ready(function()
+{
     //clear out everything
     $('.rain').empty();
 
@@ -21,6 +22,4 @@ var makeItRain = function() {
 
     $('.rain.front-row').append(drops);
     $('.rain.back-row').append(backDrops);
-  }
-
-makeItRain();
+})
