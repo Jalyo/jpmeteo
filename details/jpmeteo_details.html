@@ -2,6 +2,7 @@
     <thead>
         <tr>
             <th>Heure</th>
+            <th>Situation</th>
             <th>Température</th>
             <th>Température ressentie</th>
             <th>Vent (km/h)</th>
@@ -14,6 +15,7 @@
         {{#hour}}
             <tr>
                 <td>{{french_hour}}</td>
+                <td><img src="{{condition.icon}}"></td>
                 <td>{{temp_c}} °C</td>
                 <td>{{feelslike_c}} °C</td>
                 <td>{{wind_kph}} km/h</td>
