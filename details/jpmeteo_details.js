@@ -12,10 +12,7 @@ var jpmeteo_details = {
                 hour.french_hour = jpmeteo_date.hours(hour.time_epoch * 1000);
                 hour.french_date = jpmeteo_date.date(hour.time_epoch * 1000);
             }
-
-            
         }
-        console.log(data);
     }
 }
 
@@ -40,6 +37,8 @@ $(document).ready(function()
     {
         $('.jpmeteo_details').addClass('visible');
 
+        $('.jpmeteo_details .header .date').html(jpmeteo_date.date(data.forecast.forecastday[0].date_epoch * 1000));
+
         var details = Mustache.render(template, data.forecast.forecastday[0]);
 
         $('.jpmeteo_details .content').html(details);
@@ -49,6 +48,8 @@ $(document).ready(function()
     {
         $('.jpmeteo_details').addClass('visible');
 
+        $('.jpmeteo_details .header .date').html(jpmeteo_date.date(data.forecast.forecastday[1].date_epoch * 1000));
+
         var details = Mustache.render(template, data.forecast.forecastday[1]);
 
         $('.jpmeteo_details .content').html(details);
@@ -57,6 +58,8 @@ $(document).ready(function()
     $('.forecast .2').on('click', function()
     {
         $('.jpmeteo_details').addClass('visible');
+
+        $('.jpmeteo_details .header .date').html(jpmeteo_date.date(data.forecast.forecastday[2].date_epoch * 1000));
 
         var details = Mustache.render(template, data.forecast.forecastday[2]);
 

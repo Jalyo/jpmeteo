@@ -10,7 +10,7 @@ var jpmeteo_mood = {
                 'mood' : 'bored',
                 'img' : 'resources/moods/bored.png',
                 'bubble' : [
-                    "<span><span class='temp'>🌡️{{temp}}°C</span> !! Ca caille ! Un vin chaud et télé canapé !</span>"
+                    "<span class='icon' style='background-image:url(\"{{icon}}\")'></span><span class='text'>{{text}}</span><span><span class='temp'>🌡️{{temp}}°C</span> !! Ca caille ! Un vin chaud et télé canapé !</span>"
                 ]
             },
             {
@@ -20,7 +20,7 @@ var jpmeteo_mood = {
                 'mood' : 'angry',
                 'img' : 'resources/moods/angry.png',
                 'bubble' : [
-                    "<span><span class='temp'>🌡️{{temp}}°C</span> !! Infec ce temps... Un temps pour les bureaucrates !</span>"
+                    "<span class='icon' style='background-image:url(\"{{icon}}\")'></span><span class='text'>{{text}}</span><span><span class='temp'>🌡️{{temp}}°C</span> !! Infec ce temps... Un temps pour les bureaucrates !</span>"
                 ]
             },
             {
@@ -30,7 +30,7 @@ var jpmeteo_mood = {
                 'mood' : 'bored',
                 'img' : 'resources/moods/bored.png',
                 'bubble' : [
-                    "<span>Bon, <span class='temp'>🌡️{{temp}}°C</span>, une écharpe 🧣, un café ☕ et ça devrait le faire</span>"
+                    "<span class='icon' style='background-image:url(\"{{icon}}\")'></span><span class='text'>{{text}}</span><span>Bon, <span class='temp'>🌡️{{temp}}°C</span>, une écharpe 🧣, un café ☕ et ça devrait le faire</span>"
                 ]
             },
             {
@@ -40,7 +40,7 @@ var jpmeteo_mood = {
                 'mood' : 'angry',
                 'img' : 'resources/moods/angry.png',
                 'bubble' : [
-                    "<span><span class='temp'>🌡️{{temp}}°C</span>, ça va, mais la pluie, c'est pas pour moi ! Heureusement que j'ai finis la toiture !!</span>"
+                    "<span class='icon' style='background-image:url(\"{{icon}}\")'></span><span class='text'>{{text}}</span><span><span class='temp'>🌡️{{temp}}°C</span>, ça va, mais la pluie, c'est pas pour moi ! Heureusement que j'ai finis la toiture !!</span>"
                 ]
             },
             {
@@ -60,7 +60,7 @@ var jpmeteo_mood = {
                 'mood' : 'sad',
                 'img' : 'resources/moods/sad.png',
                 'bubble' : [
-                    "<span>Roh mais c'est quoi cette pluie ! Alors qu'il fait <span class='temp'>🌡️{{temp}}°C</span></span>"
+                    "<span class='icon' style='background-image:url(\"{{icon}}\")'></span><span class='text'>{{text}}</span><span>Roh mais c'est quoi cette pluie ! Alors qu'il fait <span class='temp'>🌡️{{temp}}°C</span></span>"
                 ]
             },
             {
@@ -70,7 +70,7 @@ var jpmeteo_mood = {
                 'mood' : 'happy',
                 'img' : 'resources/moods/happy.png',
                 'bubble' : [
-                    "<span>Ahh !!! ça c'est du beau temps ! Un bon <span class='temp'>🌡️{{temp}}°C</span>, parfait ! Les abeilles sont de sorti !</span>"
+                    "<span class='icon' style='background-image:url(\"{{icon}}\")'></span><span class='text'>{{text}}</span><span>Ahh !!! ça c'est du beau temps ! Un bon <span class='temp'>🌡️{{temp}}°C</span>, parfait ! Les abeilles sont de sorti !</span>"
                 ]
             },
             {
@@ -80,7 +80,7 @@ var jpmeteo_mood = {
                 'mood' : 'neutral',
                 'img' : 'resources/moods/neutral.png',
                 'bubble' : [
-                    "<span>Un bon <span class='temp'>🌡️{{temp}}°C</span> oui, mais une pluie.... Infec !</span>"
+                    "<span class='icon' style='background-image:url(\"{{icon}}\")'></span><span class='text'>{{text}}</span><span>Un bon <span class='temp'>🌡️{{temp}}°C</span> oui, mais une pluie.... Infec !</span>"
                 ]
             },
             {
@@ -90,7 +90,7 @@ var jpmeteo_mood = {
                 'mood' : 'happy',
                 'img' : 'resources/moods/happy.png',
                 'bubble' : [
-                    "<span>Ouah !!! <span class='temp'>🌡️{{temp}}°C</span> !! Les volets fermés, une bonne bière bien fraîche et on reste au frais</span>"
+                    "<span class='icon' style='background-image:url(\"{{icon}}\")'></span><span class='text'>{{text}}</span><span>Ouah !!! <span class='temp'>🌡️{{temp}}°C</span> !! Les volets fermés, une bonne bière bien fraîche et on reste au frais</span>"
                 ]
             },
             {
@@ -100,7 +100,7 @@ var jpmeteo_mood = {
                 'mood' : 'warm',
                 'img' : 'resources/moods/warm.png',
                 'bubble' : [
-                    "<span><span class='temp'>🌡️{{temp}}°C</span> et une pluie ? ça pue l'orage non ?</span>"
+                    "<span class='icon' style='background-image:url(\"{{icon}}\")'></span><span class='text'>{{text}}</span><span><span class='temp'>🌡️{{temp}}°C</span> et une pluie ? ça pue l'orage non ?</span>"
                 ]
             }
         ];

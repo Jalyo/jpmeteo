@@ -16,20 +16,34 @@
     display: block;
 }
 
+.jpmeteo_details .header
+{
+    cursor: pointer;
+    display: flex;;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    justify-content: center;
+}
+
 .jpmeteo_details .close
 {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background-color: black;
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
+    margin-left: auto;
+    padding: 10px;
+}
+
+.jpmeteo_details .close i
+{
+    margin-right: 10px;
+}
+
+.jpmeteo_details .date
+{
+    padding: 10px;
 }
 
 .styled-table {
     border-collapse: collapse;
-    margin: 25px 0;
     font-size: 0.9em;
     font-family: sans-serif;
     min-width: 400px;
@@ -40,12 +54,19 @@
 
 .styled-table thead
 {
+    position: sticky;
+    top: 0;
 }
 
 .styled-table thead tr {
     background-color: #E74C3C;
     color: #ffffff;
     text-align: left;
+}
+
+.styled-table th
+{
+
 }
 
 .styled-table th,
