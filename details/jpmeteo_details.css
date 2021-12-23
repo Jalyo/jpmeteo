@@ -1,0 +1,74 @@
+.jpmeteo_details
+{
+    position: relative;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    overflow: auto;
+}
+
+.jpmeteo_details.visible
+{
+    display: block;
+}
+
+.jpmeteo_details .close
+{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: black;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    color: black;
+}
+
+.styled-table thead
+{
+}
+
+.styled-table thead tr {
+    background-color: #E74C3C;
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody
+{
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}

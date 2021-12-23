@@ -10,6 +10,11 @@
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
+       
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.0.0/mustache.js"></script>
+
+
         <link rel="stylesheet" href="jpmeteo.css">
 
         <!-- Date -->
@@ -17,6 +22,9 @@
 
         <!-- Mood -->
         <script type="text/javascript" src="mood/jpmeteo_mood.js"></script>
+
+        <!-- Condition -->
+        <script type="text/javascript" src="condition/jpmeteo_condition.js"></script>
 
         <!-- Rain -->
         <script type="text/javascript" src="rain/jpmeteo_rain.js"></script>
@@ -29,6 +37,13 @@
 
         <!-- Sun -->
         <link rel="stylesheet" href="sun/jpmeteo_sun.css">
+
+        <!-- Fog -->
+        <link rel="stylesheet" href="fog/jpmeteo_fog.css">
+
+        <!-- Details -->
+        <script type="text/javascript" src="details/jpmeteo_details.js"></script>
+        <link rel="stylesheet" href="details/jpmeteo_details.css">
         
         <script type="text/javascript">
 
@@ -58,82 +73,128 @@
 
             $(document).ready(function()
             {
-                $.getJSON('https://www.weatherapi.com/docs/conditions.json', function(conditions)
+                $.getJSON('https://api.weatherapi.com/v1/forecast.json', {'key':'0368f1d4238b4f12b53161351211712', 'q':"48.17,-1.3", "days" :"10"}, function(d)
                 {
-                    $.getJSON('https://api.weatherapi.com/v1/forecast.json', {'key':'0368f1d4238b4f12b53161351211712', 'q':"48.17,-1.3", "days" :"10"}, function(d)
+                    data = d;
+
+                    jpmeteo_details.more(data);
+                    
+                    /** TODAY **/
+                    $('.top .date').text(jpmeteo_date.date(d.current.last_updated));
+
+                    $('.icon').css('background-image' , "url("+d.current.condition.icon+")");
+
+                    // $('.jpmeteo_mood').addClass(mood(d.current.temp_c, d.current.precip_mm));
+                    var mood = jpmeteo_mood.get(d.current.temp_c, d.current.precip_mm);
+                    $('.jpmeteo_mood img').attr('src', mood.img);
+
+                    $('.jpmeteo_bubble .content').html(Mustache.render(mood.bubble[0],{
+                        temp:d.current.temp_c,
+                        icon:d.current.condition.icon,
+                        text:jpmeteo_condition.get(d.current.condition.code).day_text
+                    }));
+
+                    function bubble_size()
                     {
-                        console.log(d);
-                        /** TODAY **/
-                        $('.jpmeteo_date').text(jpmeteo_date.date(d.current.last_updated));
+                        var mood_width = 500;
+                        var mood_height = 477;
+                        var mood_ratio = mood_width / mood_height;
 
-                        $('.icon').css('background-image' , "url("+d.current.condition.icon+")");
+                        var container_mood_ratio = $('.jpmeteo_mood').width() / $('.jpmeteo_mood').height();
 
-                        $('.jpmeteo_mood').addClass(mood(d.current.temp_c, d.current.precip_mm));
+                        var total_height = $('.jpmeteo .center').height();
+                        var total_width = $('.jpmeteo .center').width();
 
-                        // Extras
-                        if(d.current.precip_mm > 0)
+                        var bubble_height, bubble_width, real_mood_width, real_mood_height;
+
+                        if(container_mood_ratio > mood_ratio)
                         {
-                            rain();
+                            // full height
+                            real_mood_width = $('.jpmeteo_mood').height() / mood_ratio;
+                            real_mood_height = $('.jpmeteo_mood').height();
+                        }
+                        else
+                        {
+                            // Full width
+                            real_mood_width = $('.jpmeteo_mood').width();
+                            real_mood_height = $('.jpmeteo_mood').width() * mood_ratio;
                         }
 
-                        if(d.forecast.forecastday[0].day.daily_will_it_snow)
+                        var available_height = total_height - real_mood_height;
+                        var available_width = total_width - real_mood_width;
+
+                        $('.jpmeteo .center .jpmeteo_bubble').removeClass('top');
+                        $('.jpmeteo .center .jpmeteo_bubble').removeClass('left');
+
+                        if(available_height > available_width)
                         {
-                            snow();
+                            $('.jpmeteo .center .jpmeteo_bubble').addClass('top');
+                            bubble_height = available_height;
+                            bubble_width = '100%';
+                        }
+                        else
+                        {
+                            $('.jpmeteo .center .jpmeteo_bubble').addClass('left');
+                            bubble_height = '100%';
+                            bubble_width = available_width;
                         }
 
-                        if(d.current.condition.text == "Sunny")
+                        $('.jpmeteo .center .jpmeteo_bubble').height(bubble_height);
+                        $('.jpmeteo .center .jpmeteo_bubble').width(bubble_width);
+                    }
+
+                    $(window).on('resize', bubble_size);
+
+                    bubble_size();
+
+                    // Extras
+                    if(d.current.precip_mm > 0)
+                    {
+                        rain();
+                    }
+
+                    if(d.forecast.forecastday[0].day.daily_will_it_snow)
+                    {
+                        snow();
+                    }
+
+                    if(d.current.condition.text == "Sunny")
+                    {
+                        sun();
+                    }
+
+                    /** FORECAST **/
+                    for(var i in d.forecast.forecastday)
+                    {
+                        if(i == 0) continue; // Today
+
+                        var current_forecast = d.forecast.forecastday[i];
+
+                        var $current_forecast = $('.forecast .' + i);
+
+                        var french_condition = jpmeteo_condition.get(current_forecast.day.condition.code);
+                        
+                        $current_forecast.find('.day .label').text(french_condition['day_text']);
+
+                        var temp;
+
+                        if(current_forecast.day.avgtemp_c < 5)
                         {
-                            sun();
+                            temp = "<i class='fa fa-temperature-low'></i>"
                         }
-
-                        /** FORECAST **/
-                        for(var i in d.forecast.forecastday)
+                        else if (5 < current_forecast.day.avgtemp_c && current_forecast.day.avgtemp_c < 20)
                         {
-                            if(i == 0) continue; // Today
-
-                            var current_forecast = d.forecast.forecastday[i];
-
-                            var $current_forecast = $('.forecast .' + i);
-
-                            var condition = conditions.filter(function(condition)
-                            {
-                                return condition['code'] == current_forecast.day.condition.code;
-                            });
-
-                            condition = condition.shift();
-
-                            var french_condition = condition.languages.filter(function(language)
-                            {
-                                return language['lang_iso'] == 'fr';
-                            });
-
-                            french_condition = french_condition.shift();
-
-                            // console.log(current_forecast, french_condition);
-
-                            $current_forecast.find('.day .label').text(french_condition['day_text']);
-
-                            var temp;
-
-                            if(current_forecast.day.avgtemp_c < 5)
-                            {
-                                temp = "<i class='fa fa-temperature-low'></i>"
-                            }
-                            else if (5 < current_forecast.day.avgtemp_c && current_forecast.day.avgtemp_c < 20)
-                            {
-                                temp = "<i class='fa fa-thermometer-half'></i>"
-                            }
-                            else
-                            {
-                                temp = "<i class='fa fa-temperature-high'></i>"
-                            }
-                            $current_forecast.find('.date').text(jpmeteo_date.date(current_forecast.date));
-                            $current_forecast.find('.day .temp').html(temp+ ' ' + current_forecast.day.avgtemp_c);
-                            $current_forecast.find('.day .icon').css("background-image", "url('"+current_forecast.day.condition.icon+"')");
+                            temp = "<i class='fa fa-thermometer-half'></i>"
                         }
-                    });
+                        else
+                        {
+                            temp = "<i class='fa fa-temperature-high'></i>"
+                        }
+                        $current_forecast.find('.date').text(jpmeteo_date.date(current_forecast.date));
+                        $current_forecast.find('.day .temp').html(temp+ ' ' + current_forecast.day.avgtemp_c);
+                        $current_forecast.find('.day .icon').css("background-image", "url('"+current_forecast.day.condition.icon+"')");
+                    }
                 });
-
             });
 
         </script>
@@ -143,8 +204,8 @@
         <div class="jpmeteo">
 
             <div class="top">
-                <h1>La météo pour JP</h1>
-                <h2 class="jpmeteo_date"></h2>
+                <h2 class="date"></h2>
+                <h2 class="title">La météo pour JP</h2>
             </div>
             
             <div class="center">
@@ -175,10 +236,17 @@
                     </div>
                 </div>
 
+                
+                <!-- Bubble -->
+                <div class="jpmeteo_bubble">
+                    <div class="content"></div>
+                </div>
+
                 <!-- Mood -->
                 <div class="jpmeteo_mood">
-
+                    <img />
                 </div>
+
 
             </div>
 
@@ -204,6 +272,12 @@
                     </div>
                 </div>
             </div>
+
+            <div class="jpmeteo_details">
+                <div class="close"></div>
+                <div class="content"></div>
+            </div>
+
         </div>
     </body>
 </html>

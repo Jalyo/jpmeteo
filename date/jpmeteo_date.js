@@ -18,5 +18,14 @@ jpmeteo_date = {
         date = new Date(date);
 
         return date_to_string(date);
+    },
+    hours : function(date)
+    {
+        date = new Date(date);
+
+        var hours = date.getHours() > 9 ? date.getHours() : "0" + date.getHours();
+        var minutes = date.getMinutes() > 9 ? date.getMinutes() : "0" + date.getMinutes();
+
+        return hours + ":" + minutes;
     }
 }

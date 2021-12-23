@@ -7,6 +7,11 @@ body
     color: #E74C3C
 }
 
+h1
+{
+    font-size: 50px;
+}
+
 h1, h2, h3
 {
     color: #363737;
@@ -33,6 +38,18 @@ h1, h2, h3
 .jpmeteo .top
 {
     /* background-color: #0F223D; */
+    display: flex;
+}
+
+.jpmeteo .top .title
+{
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.jpmeteo .top .date
+{
+    margin-left: 20px;
 }
 
 .jpmeteo .center
@@ -43,18 +60,26 @@ h1, h2, h3
     background-size: cover;
     flex: 1 1 auto;
     overflow: hidden;
+    display: flex;
 }
 
 .jpmeteo .center .jpmeteo_mood
 {
-    position: absolute;
-    bottom: -60px;
-    right: 0;
-    width: 100%;
+    width: 50%;
     height: 100%;
     background-repeat: no-repeat;
     background-size: contain;
     background-position: right bottom;
+    margin-left: 50%;
+}
+
+.jpmeteo .center .jpmeteo_mood img
+{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    overflow: hidden;
+    object-position: right bottom;
 }
 
 .jpmeteo .center .jpmeteo_mood.angry
@@ -87,6 +112,106 @@ h1, h2, h3
     background-image: url(resources/moods/warm.png);
 }
 
+.jpmeteo .center .jpmeteo_bubble
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+}
+
+.jpmeteo .center .jpmeteo_bubble:hover .content
+{
+    cursor: pointer;
+    background-color: #efefef;
+}
+
+.jpmeteo .center .jpmeteo_bubble .content
+{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 10%;
+    flex: 1 1 auto;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    border: 1px solid black;
+    color: black;
+    align-items: center;
+    justify-content: center;
+    text-transform: none;
+    padding: 20px;
+    line-height: 1.5em;
+}
+
+.jpmeteo .center .jpmeteo_bubble .content:before
+{  
+    content: '';
+    display: inline-block;
+    height: 0;
+    width: 0;
+    border-top: 40px solid black;
+    border-right: 20px solid transparent;
+    border-left: 20px solid transparent;
+    position: absolute;
+    bottom: -40px;
+    right: 25%;
+}
+
+.jpmeteo .center .jpmeteo_bubble .content:after
+{
+    content: '';
+    display: inline-block;
+    height: 0;
+    width: 0;
+    border-top: 38px solid white;
+    border-right: 19px solid transparent;
+    border-left: 19px solid transparent;
+    position: absolute;
+    bottom: -38px;
+    right: calc(25% + 1px);
+}
+
+.jpmeteo .center .jpmeteo_bubble.left .content:before
+{
+    border-top : 20px solid transparent;
+    border-bottom : 20px solid transparent;
+    border-left : 40px solid black;
+    bottom: 25%;
+    right: -60px;
+}
+
+.jpmeteo .center .jpmeteo_bubble.left .content:after
+{
+    content: '';
+    display: inline-block;
+    height: 0;
+    width: 0;
+    border-top : 19px solid transparent;
+    border-bottom : 19px solid transparent;
+    border-left : 38px solid white;
+    position: absolute;
+    bottom: calc(25% + 1px);
+    right: -56px;
+}
+
+.jpmeteo .center .jpmeteo_bubble .content .icon
+{
+    width: 128px;
+    height: 128px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.jpmeteo .center .jpmeteo_bubble .content .text
+{
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #e74c3c;
+    margin-bottom: 20px;
+}
+
 .jpmeteo .bottom
 {
     height: 20%;
@@ -100,6 +225,12 @@ h1, h2, h3
     border-right: 1px solid #E0D6D5;
     display: flex;
     flex-direction: column;
+}
+
+.jpmeteo .bottom > div:hover
+{
+    background-color: #efefef;
+    cursor: pointer;
 }
 
 .jpmeteo .bottom > div .date

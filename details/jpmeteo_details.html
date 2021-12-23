@@ -1,0 +1,26 @@
+<table  class="styled-table">
+    <thead>
+        <tr>
+            <th>Heure</th>
+            <th>Température</th>
+            <th>Température ressentie</th>
+            <th>Vent (km/h)</th>
+            <th>Rafale (km/h)</th>
+            <th>Taux d'humitidé</th>
+            <th>Précipitation (mm)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#hour}}
+            <tr>
+                <td>{{french_hour}}</td>
+                <td>{{temp_c}} °C</td>
+                <td>{{feelslike_c}} °C</td>
+                <td>{{wind_kph}} km/h</td>
+                <td>{{gust_kph}} km/h</td>
+                <td>{{humidity}} %</td>
+                <td>{{precip_mm}} mm</td>
+            </tr>
+        {{/hour}}
+    </tbody>
+</table>
