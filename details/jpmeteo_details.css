@@ -43,7 +43,7 @@
     padding: 10px;
 }
 
-.styled-table {
+table {
     border-collapse: collapse;
     font-size: 0.9em;
     font-family: sans-serif;
@@ -53,45 +53,111 @@
     width: 100%;
 }
 
-.styled-table thead
+table thead
 {
     position: sticky;
     top: 38px;
 }
 
-.styled-table thead tr {
+table thead tr {
     background-color: #E74C3C;
     color: #ffffff;
     text-align: left;
 }
 
-.styled-table th
+table th
 {
 
 }
 
-.styled-table th,
-.styled-table td {
+table th,
+table td {
     padding: 12px 15px;
 }
 
-.styled-table tbody
+table tbody
 {
 }
 
-.styled-table tbody tr {
+table tbody tr {
     border-bottom: 1px solid #dddddd;
 }
 
-.styled-table tbody tr:nth-of-type(even) {
+table tbody tr.current {
+    font-weight: bold;
+}
+
+table tbody tr:nth-of-type(even) td {
     background-color: #f3f3f3;
 }
 
-.styled-table tbody tr:last-of-type {
+table tbody tr:last-of-type {
     border-bottom: 2px solid #009879;
 }
 
-.styled-table tbody tr.active-row {
+table tbody tr.active-row {
     font-weight: bold;
     color: #009879;
 }
+
+@media screen and (max-width: 900px) {
+    table {
+      border: 0;
+    }
+  
+    table caption {
+      font-size: 1.3em;
+    }
+    
+    table thead {
+      border: none;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+
+    table tbody
+    {
+        
+        background-color: #f3f3f3;
+    }
+    
+    table tbody tr {
+      background-color: white;
+      border-bottom: 3px solid #ddd;
+      border-top: 3px solid #ddd;
+      display: block;
+      margin: 2em 0;
+    }
+
+    table tbody tr:nth-of-type(even) td {
+        background-color: white
+    }
+    
+    table td {
+      border-bottom: 1px solid #ddd;
+      display: block;
+      font-size: .8em;
+      text-align: right;
+    }
+    
+    
+    table td::before {
+      /*
+      * aria-label has no advantage, it won't be read inside a table
+      content: attr(aria-label);
+      */
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    
+    table td:last-child {
+      border-bottom: 0;
+    }
+  }

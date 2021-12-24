@@ -5,23 +5,23 @@
             <th>Situation</th>
             <th>Température</th>
             <th>Température ressentie</th>
-            <th>Vent (km/h)</th>
-            <th>Rafale (km/h)</th>
+            <th>Vent</th>
+            <th>Rafale</th>
             <th>Taux d'humitidé</th>
-            <th>Précipitation (mm)</th>
+            <th>Précipitation</th>
         </tr>
     </thead>
     <tbody>
         {{#hour}}
-            <tr>
-                <td>{{french_hour}}</td>
-                <td><img src="{{condition.icon}}"></td>
-                <td>{{temp_c}} °C</td>
-                <td>{{feelslike_c}} °C</td>
-                <td>{{wind_kph}} km/h</td>
-                <td>{{gust_kph}} km/h</td>
-                <td>{{humidity}} %</td>
-                <td>{{precip_mm}} mm</td>
+            <tr {{#current}}class="current"{{/current}}>
+                <td data-label="Heure">{{french_hour}}</td>
+                <td data-label="Situation"><img src="{{condition.icon}}"></td>
+                <td data-label="Température">{{temp_c}} °C</td>
+                <td data-label="Température ressentie">{{feelslike_c}} °C</td>
+                <td data-label="Vent">{{wind_kph}} km/h</td>
+                <td data-label="Rafale">{{gust_kph}} km/h</td>
+                <td data-label="Taux d'humitidé">{{humidity}} %</td>
+                <td data-label="Précipitation">{{precip_mm}} mm</td>
             </tr>
         {{/hour}}
     </tbody>

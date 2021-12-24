@@ -1,6 +1,8 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
 
         <script
             src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -10,10 +12,7 @@
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-       
-
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.0.0/mustache.js"></script>
-
 
         <link rel="stylesheet" href="jpmeteo.css">
 
@@ -44,6 +43,7 @@
         <!-- Details -->
         <script type="text/javascript" src="details/jpmeteo_details.js"></script>
         <link rel="stylesheet" href="details/jpmeteo_details.css">
+        
         
         <script type="text/javascript">
 
@@ -78,6 +78,7 @@
                     data = d;
 
                     console.log(d);
+
                     jpmeteo_details.more(data);
                     
                     /** TODAY **/
@@ -86,13 +87,14 @@
                     $('.icon').css('background-image' , "url("+d.current.condition.icon+")");
 
                     // $('.jpmeteo_mood').addClass(mood(d.current.temp_c, d.current.precip_mm));
-                    var mood = jpmeteo_mood.get(d.current.temp_c, d.current.precip_mm);
+                    var mood = jpmeteo_mood.get(d.current_hour.temp_c, d.current_hour.will_it_rain);
+
                     $('.jpmeteo_mood img').attr('src', mood.img);
 
                     $('.jpmeteo_bubble .content').html(Mustache.render(mood.bubble[0],{
-                        temp:d.current.temp_c,
-                        icon:d.current.condition.icon,
-                        text:jpmeteo_condition.get(d.current.condition.code).day_text
+                        temp:d.current_hour.temp_c,
+                        icon:d.current_hour.condition.icon,
+                        text:jpmeteo_condition.get(d.current_hour.condition.code).day_text
                     }));
 
                     function bubble_size()
@@ -149,17 +151,17 @@
                     bubble_size();
 
                     // Extras
-                    if(d.current.precip_mm > 0)
+                    if(d.current_hour.will_it_rain)
                     {
                         rain();
                     }
 
-                    if(d.forecast.forecastday[0].day.daily_will_it_snow)
+                    if(d.current_hour.will_it_snow)
                     {
                         snow();
                     }
 
-                    if(d.current.condition.text == "Sunny")
+                    if(d.current_hour.condition.text == "Sunny")
                     {
                         sun();
                     }

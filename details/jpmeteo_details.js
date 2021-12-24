@@ -1,6 +1,9 @@
 var jpmeteo_details = {
     more : function(data)
     {
+        var date = new Date();
+        var current_time = Math.trunc(date.getTime() / 1000);
+
         for(var i in data.forecast.forecastday)
         {
             var forecastday = data.forecast.forecastday[i];
@@ -11,6 +14,13 @@ var jpmeteo_details = {
 
                 hour.french_hour = jpmeteo_date.hours(hour.time_epoch * 1000);
                 hour.french_date = jpmeteo_date.date(hour.time_epoch * 1000);
+
+                if(!data.current_hour && hour.time_epoch > current_time)
+                {
+                    data.current_hour = forecastday.hour[j - 1];
+
+                    data.current_hour.current = true;
+                }
             }
         }
     }
